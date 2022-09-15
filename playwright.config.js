@@ -110,7 +110,7 @@ const { devices } = require('@playwright/test');
 const config = {
   use: {
     // All requests we send go to this API endpoint.
-    baseURL: 'https://api.github.com',
+    baseURL: 'https://pokeapi.co/api/v2',
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
       'Accept': 'application/vnd.github.v3+json',
@@ -118,6 +118,14 @@ const config = {
       // Assuming personal access token available in the environment.
       'Authorization': `token ${process.env.API_TOKEN}`,
     },
+    testMatch: ["test-tests/example.spec.js"],
+    reporter: [
+      ["dot"], // -> console
+      ["json", { outputFile: "test-result.json" }], //  -> JSON
+      ['html', {
+          open: "always"
+      }] // -> HTML
+  ],
   }
 };
 module.exports = config;
